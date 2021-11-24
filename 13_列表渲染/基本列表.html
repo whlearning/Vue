@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代码模板</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <ul>
+            <!-- 遍历数组 -->
+            <h1>人员列表</h1>
+            <ul>
+                <li v-for="(p,index) of persons" :key="index">
+                    {{p.name}}-{{p.age}}-{{index}}
+                </li>
+            </ul>
+            <!-- 遍历对象 -->
+            <h1>汽车信息</h1>
+            <ul>
+                <li v-for="(value,k) in car" :key='k'>
+                    {{k}}-{{value}}
+                </li>
+            </ul>
+            <!-- 遍历字符串 -->
+            <h1>测试遍历字符串</h1>
+            <ul>
+                <li v-for="(char,index) in str" :key='index'>
+                    {{index}}-{{char}}
+                </li>
+            </ul>
+            <!-- 遍历指定次数 -->
+            <h1>测试遍历指定次数</h1>
+            <ul>
+                <li></li>
+            </ul>
+        </ul>
+    </div>
+    <script>
+        Vue.config.productionTip = false;
+        new Vue({
+            el: '#root',
+            data: {
+                persons: [
+                    { name: '张三', age: 18 },
+                    { name: '李四', age: 19 },
+                    { name: '王五', age: 20 }
+                ],
+                car: {
+                    name: '奥迪a8',
+                    price: '99999',
+                    color: 'red'
+                },
+                str: 'hello'
+            }
+        })
+    </script>
+</body>
+
+</html>

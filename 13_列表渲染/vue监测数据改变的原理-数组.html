@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue监测数据改变的原理-数组</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h2>学生信息</h2>
+        <button @click="addSex">增加一个性别属性</button>
+        <h3>姓名：{{name}}</h3>
+        <h3>年龄：18</h3>
+        <h3 v-if="student.sex">性别：{{student.sex}}</h3>
+        <!-- v-if用于判断sex属性是否存在，存在就展示，不存在就不展示 -->
+
+    </div>
+    <script>
+        Vue.config.productionTip = false;
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                student
+            },
+            methods: {
+                addSex() {
+                    // Vue.set(this.student, 'sex', '男1')
+                    this.$set(this.student, 'sex', '男1')
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义指令-对象</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- <div id="root">
+        <h3>原来的n是：<span v-text="n"></span></h3>
+        <h3>放大十倍后的n是：<span v-big="n"></span></h3>
+        <button @click="n++">点我加1</button>
+    </div>
+    <script>
+        Vue.config.productionTip = false;
+        new Vue({
+            el: '#root',
+            data: {
+                n: 1
+            },
+            directives: {
+                big(element, binding) {
+                    element.innerText = binding.value * 10
+                }
+            }
+        })
+    </script> -->
+
+    <div id="root">
+        <!-- 需求2:定义一个v-fbind指令，和v-bind功能类似，但可以让其所绑定的input元素默认获取焦点。 -->
+        <h3>n是：<span v-text="n"></span></h3>
+        <button @click="n++">点我加1</button>
+        <input type="text" v-fbind:value="n">
+    </div>
+    <script>
+        Vue.config.productionTip = false;
+        new Vue({
+            el: '#root',
+            data: {
+                n: 1
+            },
+            directives: {
+                // fbind(element, binding) {
+                //     element.value = binding.value
+                // element.focus()
+                // }
+                // 上面的代码无法实现需求2，因为光标出现时是将input渲染到页面的一瞬间才出现的，既不是绑定也不是重新解析模板时
+                fbind: {
+                    // 指令与元素成功绑定时（一上来）调用
+                    bind(element, binding) {
+                        element.value = binding.value
+                        console.log('bind');
+                    },
+                    // 指令所在元素被插入页面时调用
+                    inserted(element, binding) {
+                        element.focus()
+                        console.log('inserted');
+                    },
+                    // 指令所在模板被重新解析时调用
+                    update(element, binding) {
+                        element.value = binding.value
+                        console.log('updated');
+                    }
+                }
+            }
+
+        })
+
+    </script>
+</body>
+
+</html>

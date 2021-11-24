@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>收集表单数据</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <form @submit.prevent="demo">
+            账号: <input type="text" id="demo" v-model.trim="account"><br><br>
+            <!-- trim修饰符去掉表单输入中的前后空格 -->
+            密码: <input type="password" v-model="password"><br><br>
+            性别: 男<input type="radio" name="sex" id="button1" value="male" v-model="sex"> 女<input type="radio" name="sex"
+                id="button1" value="female" v-model="sex"><br><br>
+            年龄:<input type="number" v-model.number="age"><br><br>
+            <!-- 第一个number限制只能输入数字，后一个修饰符number限制收集数据永远是数字型。一般同时使用 -->
+
+            爱好:
+            抽烟<input type="checkbox" value="smoke" v-model="hobby">
+            喝酒<input type="checkbox" value="drink" v-model="hobby">
+            烫头<input type="checkbox" value="thead" v-model="hobby"><br><br>
+            所属校区:
+            <select v-model="school">
+                <option value="beijing">北京</option>
+                <option value="tianjin">天津</option>
+                <option value="hangzhou">杭州</option>
+            </select><br><br>
+            其他信息:
+            <textarea v-model.lazy="other"></textarea><br><br>
+            <!-- lazy修饰符让表单内容在失去焦点的一瞬间进行收集 -->
+            <input type="checkbox" v-model="ifAgree">阅读并接受<a href="#">《用户协议》</a><br><br>
+            <input type="submit"> <br>
+        </form>
+    </div>
+    <script>
+        Vue.config.productionTip = false;
+        new Vue({
+            el: '#root',
+            data: {
+                name: '尚硅谷',
+                account: '',
+                password: '',
+                sex: '',
+                age: 19,
+                hobby: [],
+                school: [],
+                other: '',
+                ifAgree: ''
+            },
+            methods: {
+                demo() {
+                    // console.log(this._data);
+                    console.log(JSON.stringify(this._data));  //转成json字符串形式 
+                    // console.log(JSON.stringify(this.userInfo));也可以这么写，将所有信息打包放在userInfo内。但是前面的v-model内容要变成userInfo.属性
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

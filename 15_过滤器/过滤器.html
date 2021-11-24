@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>过滤器</title>
+    <script src="../js/vue.js"></script>
+    <script src="../js/dayjs.min.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1>显示格式化后的时间</h1>
+        <!-- 计算属性实现 -->
+        <h2>现在是:{{fmtTime}}</h2>
+        <!-- methods实现 -->
+        <h2>现在是:{{getFmtTime()}}</h2>
+        <!-- 过滤器实现 -->
+        <h2>现在是：{{time | timeFormater}}</h2>
+        <!-- 过滤器实现(传参) -->
+        <h2>现在是：{{time | timeFormater('YYYY-MM-DD') | mySlice}}</h2>
+    </div>
+    <div id="root2">
+        <!--插值语法 -->
+        <h3>{{msg | mySlice}}</h3>
+        <!-- 动态绑定v-bind -->
+        <h3 :x="msg | mySlice">尚硅谷</h3>
+        <!-- 注意不支持v-model -->
+
+    </div>
+    <script>
+        Vue.config.productionTip = false;
+        // 全局过滤器
+        Vue.filter('mySlice', function (value) {
+            return value.slice(0, 4)
+        })
+
+        new Vue({
+            el: '#root',
+            data: {
+                time: 1635421454263  //时间戳
+            },
+            computed: {
+                fmtTime() {
+                    return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+                }
+            },
+            methods: {
+                getFmtTime() {
+                    return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+                }
+            },
+            // 过滤器如果写在vue里面是局部的，如果想让别的组件也能使用需要定义全局过滤器
+            filters: {
+                timeFormater(value, str = 'YYYY-MM-DD HH:mm:ss') {
+                    //str默认值，如果有传参就用传参 没有用默认值
+                    return dayjs(value).format(str)
+                }
+                // 再串联一个过滤器截取年份，由上面的return结果传入参数
+                // mySlice(value) {
+                //     return value.slice(0, 4)
+                // }
+            }
+        })
+        new Vue({
+            el: '#root2',
+            data: {
+                msg: 'hello atguigu'
+            }
+        })
+    </script>
+</body>
+
+</html>

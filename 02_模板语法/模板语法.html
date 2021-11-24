@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1>插值语法</h1>
+        <h3>你好，{{name}}</h3>
+        <hr>
+        <!-- 分隔符 -->
+        <h1>指令语法</h1>
+        <!-- v-bind会将指令中的内容转化为表达式，“v-bind：”可以简写为一个冒号“：” -->
+        <a v-bind:href="school.url">点我去{{school.name.toUpperCase()}}学习</a>
+
+    </div>
+    <script>
+        Vue.config.productionTip = false;  //关闭开发者工具开头的生产模式提醒
+        //创建vue实例
+        new Vue({
+            el: '#root',
+            data: {
+                name: 'jack',
+                school: {
+                    name: 'atguigu',
+                    url: 'http://www.atguigu.com'
+                }
+
+
+            }
+        })
+    </script>
+</body>
+
+</html>

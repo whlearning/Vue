@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初识Vue</title>
+    <script src="../js/vue.js"></script>
+    <!-- 网络引入方式 -->
+    <!-- <script src="https://unpkg.com/vue@next"></script> -->
+</head>
+
+<body>
+    <!-- //div容器 -->
+    <div id="root">
+        <!-- 插值语法（vue的特殊语法），读取Vue中数据 -->
+        <h1>你好，{{name}}</h1>
+    </div>
+    <script>
+        Vue.config.productionTip = false;  //关闭开发者工具开头的生产模式提醒
+        //创建vue实例
+        new Vue({
+            el: '#root',//el用于指定当前Vue实例为哪个容器服务，值通常为css选择器字符串，也可以用class选择器符号.
+            data: {   //data用于存储数据，数据供el指定的容器使用，值暂时先写成一个对象
+                name: '尚硅谷'
+            }
+        })
+    </script>
+</body>
+
+</html>

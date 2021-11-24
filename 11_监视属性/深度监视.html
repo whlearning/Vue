@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代码模板</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1>a的值是{{numbers.a.b.c}}</h1>
+        <button @click="numbers.a.b.c++">加1</button>
+    </div>
+    <script>
+        Vue.config.productionTip = false;
+        new Vue({
+            el: '#root',
+            data: {
+                numbers: {
+                    a: {
+                        b: {
+                            c: 2000
+                        }
+                    }
+
+                }
+            },
+            watch: {
+                numbers: {
+                    deep: true,
+                    handler() {
+                        console.log('numbers改变了');
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

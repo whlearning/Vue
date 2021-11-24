@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function demo() {
+            this.x = 1
+            this.y = 2
+        }
+        // demo.prototype.a = 10;
+        console.log('#', demo.prototype);
+
+        const m = new demo();
+
+        m.__proto__.sayHello = function () {
+            console.log("hello");
+        }
+
+        console.log('@', m);
+
+
+        // console.log('*', m.__proto__);   //输出object原型对象
+    </script>
+</body>
+
+</html>

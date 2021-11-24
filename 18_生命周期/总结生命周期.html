@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>总结生命周期</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h3 :style="{opacity}">惜时如金</h3>
+        <button @click="stopTimer">点我停止变化</button>
+
+    </div>
+    <script>
+        Vue.config.productionTip = false;
+        new Vue({
+            el: '#root',
+            data: {
+                opacity: 1
+            },
+            methods: {
+                stopTimer() {
+                    this.$destroy()   //这个一调用就会执行beforeDestroy
+                }
+            },
+            mounted() {
+                console.log('mounted');
+                this.timer = setInterval(() => {
+                    console.log('setInterval');
+                    this.opacity -= 0.01
+                    if (this.opacity <= 0) this.opacity = 1
+                }, 10);
+            },
+            //在一些销毁过程不是由vm自身调用的场景中适合用beforeDestroy（处理一些善后工作）,
+            //因为这些场景甚至都没有机会调用this.$destroy方法（如这个例子中假如他杀即没有停止按钮）
+            beforeDestroy() {
+                console.log('vm即将销毁');
+                clearInterval(this.timer)
+            }
+        })
+    </script>
+</body>　
+
+</html>

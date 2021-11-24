@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代码模板</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h3 :style="{opacity:opacity}">惜时如金</h3>
+        <!-- 上面的式子可简写为<h3 :style="{opacity}"></h3> ，属于对象的增强写法-->
+
+    </div>
+    <script>
+        Vue.config.productionTip = false;
+        new Vue({
+            el: '#root',
+            data: {
+                opacity: 1
+            },
+            methods: {
+
+            },
+            a() { },
+            b() { },
+            // Vue完成模板的解析并把!初始的!真实DOM元素放入页面后（挂载完毕）再调用mounted
+            mounted() {
+                console.log('mounted');
+                setInterval(() => {
+                    this.opacity -= 0.01
+                    if (this.opacity <= 0) this.opacity = 1
+                }, 10);
+            },
+            c() { },
+            d() { }
+        })
+        // 通过外部的定时器实现（不推荐）
+        // setInterval(() => {
+        //     vm.opacity -= 0.01
+        //     if (vm.opacity <= 0) vm.opacity = 1
+        // }, 10);
+    </script>
+</body>　
+
+</html>

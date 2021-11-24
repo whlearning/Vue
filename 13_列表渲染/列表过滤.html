@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表过滤</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1>人员列表</h1>
+        <input type="text" placeholder="请输入名字" v-model="keyWord">
+        <ul>
+            <li v-for="(p,index) of filpersons" :key="p.id">
+                {{p.name}}-{{p.age}}-{{p.sex}}
+
+            </li>
+        </ul>
+    </div>
+    <script>
+        Vue.config.productionTip = false;
+
+        // 用watch实现
+        //#region 
+        // new Vue({
+        //     el: '#root',
+        //     data: {
+        //         keyWord: '',
+        //         persons: [
+        //             { name: '马冬梅', age: 18, sex: '女' },
+        //             { name: '周冬雨', age: 19, sex: '女' },
+        //             { name: '周杰伦', age: 21, sex: '男' },
+        //             { name: '温兆伦', age: 22, sex: '男' }
+        //         ],
+        //         filpersons: [
+        //         ]
+        //     },
+        //     watch: {
+        //         keyWord: {
+        //             immediate: true,
+        //             handler(val) {
+        //                 this.filpersons = this.persons.filter((p) => {
+        //                     return p.name.indexOf(val) !== -1
+        //                 })
+        //             }
+        //         }
+        //     }
+        // })
+        // #endregion
+        // 用computed实现
+        new Vue({
+            el: '#root',
+            data: {
+                keyWord: '',
+                persons: [
+                    { id: '001', name: '马冬梅', age: 18, sex: '女' },
+                    { id: '002', name: '周冬雨', age: 19, sex: '女' },
+                    { id: '003', name: '周杰伦', age: 21, sex: '男' },
+                    { id: '004', name: '温兆伦', age: 22, sex: '男' }
+                ]
+            },
+            computed: {
+                filpersons: {
+                    get() {
+                        return this.filpersons = this.persons.filter((p) => {
+                            return p.name.indexOf(this.keyWord) !== -1
+                        })
+                    },
+                    set() { }
+                }
+            }
+            // computed: {
+            //     filpersons() {
+            //         return this.filpersons = this.persons.filter((p) => {
+            //             return p.name.indexOf(this.keyWord) !== -1
+            //         })
+            //     }
+            // }
+        })
+        // computed: {
+        //     isShowDialog: {
+        //         get: function() {
+        //             return this.$store.state.isShowDialog
+        //         },
+        //         set: function() { //因为我这里并不需要其他属性也跟着一起改变 所以就这样写了      console.log('1')    }  }},复制代码
+    </script>
+</body>
+
+</html>
